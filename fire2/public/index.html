@@ -1,0 +1,54 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<link rel = "stylesheet" href = "stylesheets/style.css">
+<script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBYR0S3QLZKLWqxt7ea7-pBQaHliSm5IHA",
+    authDomain: "creative6-3a81d.firebaseapp.com",
+    databaseURL: "https://creative6-3a81d.firebaseio.com",
+    projectId: "creative6-3a81d",
+    storageBucket: "creative6-3a81d.appspot.com",
+    messagingSenderId: "106688274295"
+  };
+  firebase.initializeApp(config);
+</script>
+<!-- AngularJS -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<!-- AngularFire -->
+<script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+  <script src="javascripts/script.js"></script>
+</head>
+
+<body>
+<h1>Shopping List Anywhere</h1>
+<div ng-controller="chatController">
+	<form novalidate class="simple-form" ng-if="!logIn">
+	  Name: <input type="text" ng-model="user.name" /><br />
+	  Password: <input type="text" ng-model="user.password" /><br />
+	  <input type="submit" ng-click="signIn(user)" value="Login" />
+	  <input type="submit" ng-click="register(user)" value="Register"/>
+	</form>
+	<input type="submit" ng-if="logIn" ng-click="logout()" value="logout"/>
+	<p >{{message}}</p>
+	<div ng-if="logIn">
+		<form>
+			Item Description: <input type="text" ng-model="item.desc"/><br/>
+			Image URL: <input type="text" ng-model="item.url"/><br/>
+			Item Quantity: <input type="text" ng-model="item.amount"/><br/>
+			<input type="submit" ng-click="addItem(item)" value="Add Item"/>
+		</form>
+
+		<ul>
+			<li ng-repeat='i in inv'>
+				description: {{description}} - Quantity needed: {{i.amount}}
+				<img class="pic" ng-src="{{i.image}}"/>
+			</li>
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>
